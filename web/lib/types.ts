@@ -11,6 +11,7 @@ export type StationPrediction = {
   lon: number;
   capacity: number;
   bikes: number; // right now
+  ebikes: number; // right now, how many of `bikes` are e-bikes
   docks: number; // right now
   expectedChange: number; // bikes expected to arrive minus leave before the arrival time
   predictedBikes: number; // at the arrival time
@@ -37,6 +38,13 @@ export type ReplayInfo = {
   offsets: number[]; // minutes after `now` with logged counts
   center: [number, number];
   stats: { filled: number; filled_warned: number; emptied: number; emptied_warned: number };
+};
+
+/** GET /api/timeline: one station's chance of a dock / bike for each minute of the next 30. */
+export type TimelineResponse = {
+  now: string;
+  points: { minutes: number; pDock: number; pBike: number }[];
+  actual?: { minutes: number; docks: number; bikes: number }[]; // replays only: what was really logged
 };
 
 export type PredictResponse = {

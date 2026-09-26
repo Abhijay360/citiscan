@@ -2,8 +2,20 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { ReplayInfo } from "./types";
 
+/** A logged station: its details (so replays never need the live feed) and its counts at each offset. */
+export type ReplayStation = {
+  shortName: string;
+  name: string;
+  lat: number;
+  lon: number;
+  capacity: number;
+  docks: number[];
+  bikes: number[];
+  ebikes: number[];
+};
+
 export type ReplayScenario = ReplayInfo & {
-  stations: Record<string, { docks: number[]; bikes: number[] }>; // counts at each offset, by GBFS station_id
+  stations: Record<string, ReplayStation>; // by GBFS station_id
 };
 
 // Built offline by pipeline/make_replays.py (real logged moments, with what happened next).

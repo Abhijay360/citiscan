@@ -1,6 +1,7 @@
 // Live station data from Citi Bike's public GBFS feed (https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json).
 
-const FEED = "https://gbfs.lyft.com/gbfs/2.3/bkn/en";
+// GBFS_FEED can point elsewhere, e.g. at a dead URL to test how the app behaves when the feed is down
+const FEED = process.env.GBFS_FEED ?? "https://gbfs.lyft.com/gbfs/2.3/bkn/en";
 const STATUS_TTL_MS = 30_000; // the feed itself refreshes every 60s
 const INFO_TTL_MS = 10 * 60_000; // names and locations rarely change
 
@@ -12,6 +13,7 @@ export type LiveStation = {
   lon: number;
   capacity: number;
   bikes: number;
+  ebikes: number; // of `bikes`, how many are e-bikes
   docks: number;
   isRenting: boolean;
   isReturning: boolean;
@@ -28,6 +30,7 @@ type GbfsStatus = {
     stations: {
       station_id: string;
       num_bikes_available: number;
+      num_ebikes_available?: number;
       num_docks_available: number;
       is_installed: number;
       is_renting: number;
@@ -72,6 +75,7 @@ export async function getLiveStations(): Promise<{ lastUpdated: Date; stations: 
       lon: i.lon,
       capacity: i.capacity,
       bikes: s.num_bikes_available,
+      ebikes: s.num_ebikes_available ?? 0,
       docks: s.num_docks_available,
       isRenting: s.is_renting === 1,
       isReturning: s.is_returning === 1,

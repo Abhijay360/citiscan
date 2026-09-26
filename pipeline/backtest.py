@@ -88,14 +88,14 @@ def load_table(short_names, path=TABLE):
 
 
 def load_snapshots(source):
-    """Long table: t (unix s), station_id, bikes, docks, returning."""
+    """Long table: t (unix s), station_id, bikes, ebikes, docks, returning."""
     if source == "ours":
         files = sorted(glob.glob(str(ROOT / "data" / "snapshots" / "*.csv.gz")))
-        df = pd.concat((pd.read_csv(f, usecols=["ts", "station_id", "bikes", "docks", "is_returning"]) for f in files),
+        df = pd.concat((pd.read_csv(f, usecols=["ts", "station_id", "bikes", "ebikes", "docks", "is_returning"]) for f in files),
                        ignore_index=True).rename(columns={"ts": "t"})
     else:
         files = sorted(glob.glob(str(ROOT / "data" / "external" / "williamsburg" / "2026-09-*.csv.gz")))
-        df = pd.concat((pd.read_csv(f, usecols=["ts_bucket", "station_id", "bikes", "docks", "is_returning"]) for f in files),
+        df = pd.concat((pd.read_csv(f, usecols=["ts_bucket", "station_id", "bikes", "ebikes", "docks", "is_returning"]) for f in files),
                        ignore_index=True).rename(columns={"ts_bucket": "t"})
     df = df.drop_duplicates(["t", "station_id"])
     df["returning"] = df.pop("is_returning").astype(bool)

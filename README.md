@@ -106,6 +106,9 @@ The actual change landed inside our 80% range 82% of the time at 15 minutes and 
   point (your location, or tap the map) and the arrival time comes from the distance and real riding speeds:
   12.3 km/h straight-line on an e-bike, 9.4 km/h on a classic bike, measured from member trips. Without a start
   point, use the "arriving in" slider.
+- **The next 30 minutes**: the station card charts the chance of a dock minute by minute, with your arrival marked,
+  and says it plainly ("Likely full by 9:06 AM, about 21 min from now"). It also shows how many of the bikes are
+  e-bikes, since 73% of rides are on e-bikes.
 - **Backups**: if the destination isn't "likely", we list up to 3 stations within 1 km where a dock is likely,
   closest first, with the walking time to your destination (4.8 km/h, 1.3x the straight-line distance).
 - **How accurate is this?** opens the backtest results: the headline, warnings and false alarms, and how often
@@ -122,11 +125,14 @@ The actual change landed inside our 80% range 82% of the time at 15 minutes and 
   that had open docks were full 15 minutes later (we flagged 18). The app shows what it would have predicted,
   a scorecard, and what actually happened at each station; a toggle recolors the map by the real outcome.
   `pipeline/make_replays.py` picks the moments where the most stations filled up (skipping feed glitches) and
-  reports our hit rate on them as-is.
+  reports our hit rate on them as-is. Replays carry their own station data, so they keep working if Citi Bike's
+  live feed goes down; the app then offers one instead of showing an empty map.
 
 API: `GET /api/predict?minutes=15` (or `?at=<ISO time>`) returns every station with its live counts, expected
 change, predicted docks and bikes, and the chance of each. Demo options: `&now=<ISO>` (flows for another time),
-`&override=<station_id>:<docks>`, `&replay=<id>` (from `GET /api/replays`).
+`&override=<station_id>:<docks>`, `&replay=<id>` (from `GET /api/replays`). `GET /api/timeline?station=<station_id>`
+takes the same options and returns that station's chance of a dock and a bike for each of the next 30 minutes
+(plus the logged counts, for replays). Set `GBFS_FEED` to a dead URL to try the app with the live feed down.
 
 ## Two-minute demo script
 
@@ -191,6 +197,7 @@ web/
   app/api/predict/      live feed + flow table -> predictions for every station (+ what-if / replay)
   app/api/replays/      the replay moments available
   lib/predict.ts        the prediction math (mirrored in the Python backtest)
+  lib/scenario.ts       which moment and whose counts (live, what-if, replay) for both API routes
   lib/accuracy.ts       backtest results -> the "How accurate is this?" panel
   app/components/       map (Leaflet), search, trip card, demo controls, accuracy panel
   data/                 flow_table.json, backtest.json, replays.json (outputs of the pipeline)

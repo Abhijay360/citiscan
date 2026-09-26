@@ -21,7 +21,7 @@ OFFSETS = [0, 5, 10, 15, 20, 25, 30]  # minutes after the replay's "now"
 def candidates(df, source, info_by_id, meta, mean, var, index):
     """Every start time with snapshots at all OFFSETS, with how many stations filled up / emptied in 15 min."""
     stations = sorted(set(df.station_id) & set(info_by_id))
-    wide = {k: df.pivot(index="t", columns="station_id", values=k).reindex(columns=stations) for k in ("docks", "bikes")}
+    wide = {k: df.pivot(index="t", columns="station_id", values=k).reindex(columns=stations) for k in ("docks", "bikes", "ebikes")}
     times = wide["docks"].index.to_numpy()
     tolerance = 65  # our log occasionally misses a minute when the feed doesn't update
     rows = np.array([index[info_by_id[s]["short_name"]] for s in stations])
@@ -37,7 +37,8 @@ def candidates(df, source, info_by_id, meta, mean, var, index):
             continue
         docks = wide["docks"].iloc[idx].to_numpy()  # offsets x stations
         bikes = wide["bikes"].iloc[idx].to_numpy()
-        ok = ~np.isnan(docks).any(axis=0) & ~np.isnan(bikes).any(axis=0)
+        ebikes = wide["ebikes"].iloc[idx].to_numpy()
+        ok = ~np.isnan(docks).any(axis=0) & ~np.isnan(bikes).any(axis=0) & ~np.isnan(ebikes).any(axis=0)
         # Skip feed glitches: riders can't move 5% of an area's bikes in 5 minutes, but the feed sometimes
         # briefly drops bikes (Brooklyn, Sep 9 6:50pm: 27 stations at 0 bikes, back to 1 at 7:00).
         totals = np.nansum(bikes, axis=1)
@@ -53,7 +54,7 @@ def candidates(df, source, info_by_id, meta, mean, var, index):
         emptied = ok & (bikes[0] >= 1) & (bikes[3] == 0)
         out.append({
             "t0": int(t0), "source": source, "stations": [stations[i] for i in np.where(ok)[0]],
-            "docks": docks[:, ok], "bikes": bikes[:, ok],
+            "docks": docks[:, ok], "bikes": bikes[:, ok], "ebikes": ebikes[:, ok],
             "filled": int(filled.sum()), "filled_warned": int((filled & (p_dock < bt.LIKELY)).sum()),
             "emptied": int(emptied.sum()), "emptied_warned": int((emptied & (p_bike < bt.LIKELY)).sum()),
         })
@@ -72,8 +73,20 @@ def scenario(c, info_by_id, title, mode):
         "offsets": OFFSETS,
         "center": [round(lat, 5), round(lon, 5)],
         "stats": {k: c[k] for k in ("filled", "filled_warned", "emptied", "emptied_warned")},
-        "stations": {s: {"docks": c["docks"][:, i].astype(int).tolist(), "bikes": c["bikes"][:, i].astype(int).tolist()}
-                     for i, s in enumerate(c["stations"])},
+        # Station details travel with the replay, so replays work even when Citi Bike's live feed is down
+        "stations": {
+            s: {
+                "shortName": info_by_id[s]["short_name"],
+                "name": info_by_id[s]["name"],
+                "lat": info_by_id[s]["lat"],
+                "lon": info_by_id[s]["lon"],
+                "capacity": info_by_id[s]["capacity"],
+                "docks": c["docks"][:, i].astype(int).tolist(),
+                "bikes": c["bikes"][:, i].astype(int).tolist(),
+                "ebikes": c["ebikes"][:, i].astype(int).tolist(),
+            }
+            for i, s in enumerate(c["stations"])
+        },
     }
 
 

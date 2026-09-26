@@ -7,7 +7,7 @@ import type { SourceAccuracy } from "@/lib/accuracy";
 import { findAlternatives } from "@/lib/alternatives";
 import { bikeMinutes, distanceMeters, nearest, walkMinutes, type Place } from "@/lib/geo";
 import { nextNycTime, type DayType } from "@/lib/time";
-import type { Label, PredictResponse, ReplayInfo, StationPrediction } from "@/lib/types";
+import type { Label, PredictResponse, ReplayInfo, StationPrediction, TimelineResponse } from "@/lib/types";
 import AccuracyPanel from "./AccuracyPanel";
 import DemoControls, { type Demo } from "./DemoControls";
 import PlaceSearch from "./PlaceSearch";
@@ -74,15 +74,17 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
   }, [demo, origin, destStation, data, mode, bikeType]);
   const minutes = eta === null ? manualMinutes : Math.min(60, Math.max(1, Math.round(eta)));
 
-  const query = useMemo(() => {
-    const params = new URLSearchParams({ minutes: String(minutes) });
+  // Which moment and whose counts: live, "what if", or a replay. Shared by /api/predict and /api/timeline.
+  const scenarioParams = useMemo(() => {
+    const params = new URLSearchParams();
     if (demo === "whatif") {
       params.set("now", nextNycTime(whatIfDay, whatIfTime).toISOString());
       if (override) params.set("override", `${override.id}:${override.docks}`);
     }
     if (demo === "replay" && replayId) params.set("replay", replayId);
     return params.toString();
-  }, [minutes, demo, whatIfDay, whatIfTime, override, replayId]);
+  }, [demo, whatIfDay, whatIfTime, override, replayId]);
+  const query = `${scenarioParams ? `${scenarioParams}&` : ""}minutes=${minutes}`;
 
   useEffect(() => {
     let cancelled = false;
@@ -107,6 +109,25 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
       clearInterval(refresh);
     };
   }, [query, demo]);
+
+  // The destination's chance over the next 30 minutes, refreshed along with the live counts
+  const [timeline, setTimeline] = useState<{ key: string; data: TimelineResponse } | null>(null);
+  const timelineKey = destStation ? `station=${destStation.id}${scenarioParams ? `&${scenarioParams}` : ""}` : null;
+  const feedStamp = data?.feedUpdated;
+  useEffect(() => {
+    if (!timelineKey) return;
+    let cancelled = false;
+    fetch(`/api/timeline?${timelineKey}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((t: TimelineResponse | null) => {
+        if (!cancelled && t) setTimeline({ key: timelineKey, data: t });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [timelineKey, feedStamp]);
+  const destTimeline = timeline && timeline.key === timelineKey ? timeline.data : null;
 
   const destLabel = destStation && (mode === "dock" ? destStation.dockLabel : destStation.bikeLabel);
   const alternatives = useMemo(
@@ -195,10 +216,11 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
     );
   }
 
+  const arrivalMinutes = data ? (new Date(data.at).getTime() - new Date(data.now).getTime()) / 60_000 : minutes;
   const travelNote =
     eta !== null && origin
       ? `${minutes} min ${mode === "dock" ? `by ${bikeType === "ebike" ? "e-bike" : "classic bike"}` : "on foot"} from ${origin.label}`
-      : `Arriving in ${data ? Math.round((new Date(data.at).getTime() - new Date(data.now).getTime()) / 60_000) : minutes} min`;
+      : `Arriving in ${Math.round(arrivalMinutes)} min`;
   const replay = data?.replay;
   const revealing = demo === "replay" && reveal && Boolean(replay);
 
@@ -265,6 +287,22 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
               setReveal={setReveal}
               onTryScenario={tryScenario}
             />
+
+            {error && !data && demo !== "replay" && (
+              <div className="mt-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-950">
+                <div className="font-semibold">Citi Bike&apos;s live feed isn&apos;t responding.</div>
+                <p className="mt-0.5">
+                  We&apos;ll keep retrying every minute. Meanwhile you can replay a real past moment and see what
+                  actually happened.
+                </p>
+                <button
+                  onClick={() => changeDemo("replay")}
+                  className="mt-2 rounded-md bg-amber-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-950"
+                >
+                  Open a replay
+                </button>
+              </div>
+            )}
 
             <div className="mt-3 grid grid-cols-2 rounded-lg bg-gray-100 p-1 text-sm font-medium">
               {(["dock", "bike"] as const).map((m) => (
@@ -397,6 +435,8 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
                 alternatives={alternatives}
                 demo={demo}
                 onOverride={(docks) => setOverride({ id: destStation.id, docks })}
+                timeline={destTimeline}
+                arrivalMinutes={arrivalMinutes}
               />
             ) : (
               <p className="mt-3 text-sm text-gray-500">
@@ -453,7 +493,13 @@ export default function PredictorApp({ accuracy }: { accuracy: SourceAccuracy[] 
               </button>
             )}
 
-            {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+            {error && data && demo !== "replay" && (
+              <p className="mt-2 text-xs text-amber-700">
+                Couldn&apos;t refresh the live counts, so these are from {formatTime(data.feedUpdated)}. Retrying every
+                minute.
+              </p>
+            )}
+            {error && demo === "replay" && <p className="mt-2 text-sm text-red-600">{error}</p>}
             {data && (
               <p className="mt-3 text-xs text-gray-400">
                 {demo === "replay" && replay

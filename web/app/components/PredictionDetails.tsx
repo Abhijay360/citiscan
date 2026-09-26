@@ -47,6 +47,7 @@ export default function PredictionDetails({
     <div>
       <div className="text-sm text-gray-600">
         Now: {s.docks} open dock{s.docks === 1 ? "" : "s"} · {s.bikes} bike{s.bikes === 1 ? "" : "s"}
+        {s.ebikes > 0 && ` (${s.ebikes === s.bikes ? "all" : s.ebikes} e-bike${s.ebikes === 1 ? "" : "s"})`}
       </div>
       <div className="mt-2 flex items-center gap-2">
         <LabelChip label={label} hasHistory={s.hasHistory} />

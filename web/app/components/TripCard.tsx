@@ -1,6 +1,7 @@
 import type { Alternative } from "@/lib/alternatives";
 import { distanceMeters, walkMinutes, type Place } from "@/lib/geo";
-import type { StationPrediction } from "@/lib/types";
+import type { StationPrediction, TimelineResponse } from "@/lib/types";
+import ChanceTimeline from "./ChanceTimeline";
 import type { Demo } from "./DemoControls";
 import PredictionDetails, { LabelChip, formatTime, type Mode } from "./PredictionDetails";
 
@@ -13,6 +14,8 @@ type Props = {
   alternatives: Alternative[];
   demo: Demo;
   onOverride: (docks: number) => void; // "what if" mode: pretend the station has this many open docks
+  timeline: TimelineResponse | null; // this station's chance over the next 30 minutes
+  arrivalMinutes: number;
 };
 
 const walkText = (meters: number) => `${Math.max(1, Math.round(walkMinutes(meters)))} min walk`;
@@ -48,6 +51,8 @@ export default function TripCard({
   alternatives,
   demo,
   onOverride,
+  timeline,
+  arrivalMinutes,
 }: Props) {
   const isDock = mode === "dock";
   const label = isDock ? station.dockLabel : station.bikeLabel;
@@ -83,6 +88,14 @@ export default function TripCard({
 
       <PredictionDetails station={station} mode={mode} at={at} />
       <Outcome station={station} mode={mode} at={at} />
+      {timeline && (
+        <ChanceTimeline
+          timeline={timeline}
+          mode={mode}
+          arrivalMinutes={arrivalMinutes}
+          countNow={isDock ? station.docks : station.bikes}
+        />
+      )}
 
       {label !== "likely" && (
         <div className="mt-3 border-t border-gray-200 pt-2">

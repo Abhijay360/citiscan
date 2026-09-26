@@ -11,7 +11,7 @@ suggests nearby stations when your destination is likely to be full. Built for H
 > CitiScan is an independent hackathon project built on Citi Bike's public data. It is not affiliated with or
 > endorsed by Citi, Citi Bike or Lyft.
 
-**Live demo: https://citibike-dock-predictor.vercel.app**
+**Live demo: https://citiscan.vercel.app**
 
 On a Saturday at 1pm, 208 of 2,442 stations were completely full and 555 had two or fewer open docks. On a
 weekday morning a Midtown station like E 47 St & Park Ave gains about 44 bikes in the 7am hour alone.

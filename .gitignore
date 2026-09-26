@@ -1,0 +1,10 @@
+# raw inputs and logs are big and reproducible (see README)
+data/raw/
+data/snapshots/
+data/external/
+data/processed/
+
+__pycache__/
+*.pyc
+.venv/
+.DS_Store

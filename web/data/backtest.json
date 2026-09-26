@@ -1,0 +1,1200 @@
+{
+ "generated": "2026-09-26T14:03:29",
+ "table_months": [
+  "202606",
+  "202607",
+  "202608"
+ ],
+ "sources": {
+  "brooklyn": {
+   "span": "Sep 01 13:05 - Sep 25 21:40",
+   "stations": 195,
+   "by_subset": {
+    "all": {
+     "5": {
+      "n": 138060,
+      "mae_model": 0.655,
+      "mae_current_count": 0.655,
+      "improvement": 0.0,
+      "filled_up_cases": 3550,
+      "filled_up_warned": 0.693,
+      "filled_up_warned_spread_only": 0.687,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0289,
+      "full_on_arrival_if_we_say_likely": 0.0097,
+      "labels": {
+       "likely": {
+        "n": 112441,
+        "dock_open_rate": 0.99
+       },
+       "maybe": {
+        "n": 10506,
+        "dock_open_rate": 0.767
+       },
+       "unlikely": {
+        "n": 14470,
+        "dock_open_rate": 0.238
+       }
+      },
+      "brier_model": 0.0395,
+      "brier_spread_only": 0.0396,
+      "brier_current_count": 0.0507
+     },
+     "10": {
+      "n": 115050,
+      "mae_model": 1.042,
+      "mae_current_count": 1.045,
+      "improvement": 0.003,
+      "filled_up_cases": 4301,
+      "filled_up_warned": 0.664,
+      "filled_up_warned_spread_only": 0.648,
+      "false_alarm_rate": 0.002,
+      "full_on_arrival_if_count_shows_docks": 0.0419,
+      "full_on_arrival_if_we_say_likely": 0.0157,
+      "labels": {
+       "likely": {
+        "n": 91951,
+        "dock_open_rate": 0.984
+       },
+       "maybe": {
+        "n": 10395,
+        "dock_open_rate": 0.733
+       },
+       "unlikely": {
+        "n": 12156,
+        "dock_open_rate": 0.345
+       }
+      },
+      "brier_model": 0.0519,
+      "brier_spread_only": 0.0519,
+      "brier_current_count": 0.073
+     },
+     "15": {
+      "n": 92040,
+      "mae_model": 1.315,
+      "mae_current_count": 1.326,
+      "improvement": 0.009,
+      "filled_up_cases": 4052,
+      "filled_up_warned": 0.663,
+      "filled_up_warned_spread_only": 0.646,
+      "false_alarm_rate": 0.004,
+      "full_on_arrival_if_count_shows_docks": 0.0493,
+      "full_on_arrival_if_we_say_likely": 0.0189,
+      "labels": {
+       "likely": {
+        "n": 72430,
+        "dock_open_rate": 0.981
+       },
+       "maybe": {
+        "n": 9421,
+        "dock_open_rate": 0.726
+       },
+       "unlikely": {
+        "n": 9738,
+        "dock_open_rate": 0.402
+       }
+      },
+      "brier_model": 0.0588,
+      "brier_spread_only": 0.0588,
+      "brier_current_count": 0.0853
+     },
+     "20": {
+      "n": 69030,
+      "mae_model": 1.535,
+      "mae_current_count": 1.559,
+      "improvement": 0.016,
+      "filled_up_cases": 3355,
+      "filled_up_warned": 0.661,
+      "filled_up_warned_spread_only": 0.642,
+      "false_alarm_rate": 0.006,
+      "full_on_arrival_if_count_shows_docks": 0.0545,
+      "full_on_arrival_if_we_say_likely": 0.0212,
+      "labels": {
+       "likely": {
+        "n": 53630,
+        "dock_open_rate": 0.979
+       },
+       "maybe": {
+        "n": 7653,
+        "dock_open_rate": 0.726
+       },
+       "unlikely": {
+        "n": 7426,
+        "dock_open_rate": 0.436
+       }
+      },
+      "brier_model": 0.0634,
+      "brier_spread_only": 0.0634,
+      "brier_current_count": 0.0933
+     },
+     "30": {
+      "n": 23010,
+      "mae_model": 1.858,
+      "mae_current_count": 1.907,
+      "improvement": 0.026,
+      "filled_up_cases": 1221,
+      "filled_up_warned": 0.678,
+      "filled_up_warned_spread_only": 0.622,
+      "false_alarm_rate": 0.011,
+      "full_on_arrival_if_count_shows_docks": 0.0594,
+      "full_on_arrival_if_we_say_likely": 0.0224,
+      "labels": {
+       "likely": {
+        "n": 17521,
+        "dock_open_rate": 0.978
+       },
+       "maybe": {
+        "n": 2891,
+        "dock_open_rate": 0.729
+       },
+       "unlikely": {
+        "n": 2496,
+        "dock_open_rate": 0.476
+       }
+      },
+      "brier_model": 0.0685,
+      "brier_spread_only": 0.0686,
+      "brier_current_count": 0.1005
+     }
+    },
+    "3 or fewer docks open now": {
+     "5": {
+      "n": 41097,
+      "mae_model": 0.514,
+      "mae_current_count": 0.513,
+      "improvement": -0.001,
+      "filled_up_cases": 3409,
+      "filled_up_warned": 0.722,
+      "filled_up_warned_spread_only": 0.716,
+      "false_alarm_rate": 0.002,
+      "full_on_arrival_if_count_shows_docks": 0.1303,
+      "full_on_arrival_if_we_say_likely": 0.0608,
+      "labels": {
+       "likely": {
+        "n": 15608,
+        "dock_open_rate": 0.939
+       },
+       "maybe": {
+        "n": 10506,
+        "dock_open_rate": 0.767
+       },
+       "unlikely": {
+        "n": 14470,
+        "dock_open_rate": 0.238
+       }
+      },
+      "brier_model": 0.1304,
+      "brier_spread_only": 0.1308,
+      "brier_current_count": 0.1681
+     },
+     "10": {
+      "n": 34154,
+      "mae_model": 0.778,
+      "mae_current_count": 0.777,
+      "improvement": -0.002,
+      "filled_up_cases": 3936,
+      "filled_up_warned": 0.724,
+      "filled_up_warned_spread_only": 0.708,
+      "false_alarm_rate": 0.013,
+      "full_on_arrival_if_count_shows_docks": 0.1806,
+      "full_on_arrival_if_we_say_likely": 0.0969,
+      "labels": {
+       "likely": {
+        "n": 11206,
+        "dock_open_rate": 0.903
+       },
+       "maybe": {
+        "n": 10360,
+        "dock_open_rate": 0.733
+       },
+       "unlikely": {
+        "n": 12156,
+        "dock_open_rate": 0.345
+       }
+      },
+      "brier_model": 0.1657,
+      "brier_spread_only": 0.1658,
+      "brier_current_count": 0.2371
+     },
+     "15": {
+      "n": 27234,
+      "mae_model": 0.953,
+      "mae_current_count": 0.953,
+      "improvement": -0.001,
+      "filled_up_cases": 3567,
+      "filled_up_warned": 0.749,
+      "filled_up_warned_spread_only": 0.734,
+      "false_alarm_rate": 0.023,
+      "full_on_arrival_if_count_shows_docks": 0.2049,
+      "full_on_arrival_if_we_say_likely": 0.1144,
+      "labels": {
+       "likely": {
+        "n": 7812,
+        "dock_open_rate": 0.886
+       },
+       "maybe": {
+        "n": 9335,
+        "dock_open_rate": 0.724
+       },
+       "unlikely": {
+        "n": 9738,
+        "dock_open_rate": 0.402
+       }
+      },
+      "brier_model": 0.1831,
+      "brier_spread_only": 0.1829,
+      "brier_current_count": 0.2724
+     },
+     "20": {
+      "n": 20360,
+      "mae_model": 1.082,
+      "mae_current_count": 1.083,
+      "improvement": 0.001,
+      "filled_up_cases": 2820,
+      "filled_up_warned": 0.779,
+      "filled_up_warned_spread_only": 0.762,
+      "false_alarm_rate": 0.035,
+      "full_on_arrival_if_count_shows_docks": 0.2173,
+      "full_on_arrival_if_we_say_likely": 0.1208,
+      "labels": {
+       "likely": {
+        "n": 5164,
+        "dock_open_rate": 0.879
+       },
+       "maybe": {
+        "n": 7512,
+        "dock_open_rate": 0.724
+       },
+       "unlikely": {
+        "n": 7423,
+        "dock_open_rate": 0.436
+       }
+      },
+      "brier_model": 0.1915,
+      "brier_spread_only": 0.1914,
+      "brier_current_count": 0.2925
+     },
+     "30": {
+      "n": 6744,
+      "mae_model": 1.263,
+      "mae_current_count": 1.264,
+      "improvement": 0.001,
+      "filled_up_cases": 958,
+      "filled_up_warned": 0.822,
+      "filled_up_warned_spread_only": 0.783,
+      "false_alarm_rate": 0.061,
+      "full_on_arrival_if_count_shows_docks": 0.2222,
+      "full_on_arrival_if_we_say_likely": 0.1206,
+      "labels": {
+       "likely": {
+        "n": 1418,
+        "dock_open_rate": 0.879
+       },
+       "maybe": {
+        "n": 2749,
+        "dock_open_rate": 0.729
+       },
+       "unlikely": {
+        "n": 2491,
+        "dock_open_rate": 0.475
+       }
+      },
+      "brier_model": 0.1997,
+      "brier_spread_only": 0.1991,
+      "brier_current_count": 0.3064
+     }
+    },
+    "busiest 10% of stations": {
+     "5": {
+      "n": 31152,
+      "mae_model": 1.106,
+      "mae_current_count": 1.106,
+      "improvement": 0.0,
+      "filled_up_cases": 1295,
+      "filled_up_warned": 0.68,
+      "filled_up_warned_spread_only": 0.669,
+      "false_alarm_rate": 0.001,
+      "full_on_arrival_if_count_shows_docks": 0.0473,
+      "full_on_arrival_if_we_say_likely": 0.0171,
+      "labels": {
+       "likely": {
+        "n": 24212,
+        "dock_open_rate": 0.983
+       },
+       "maybe": {
+        "n": 3156,
+        "dock_open_rate": 0.723
+       },
+       "unlikely": {
+        "n": 3575,
+        "dock_open_rate": 0.357
+       }
+      },
+      "brier_model": 0.0583,
+      "brier_spread_only": 0.0582,
+      "brier_current_count": 0.0822
+     },
+     "10": {
+      "n": 25960,
+      "mae_model": 1.674,
+      "mae_current_count": 1.681,
+      "improvement": 0.004,
+      "filled_up_cases": 1455,
+      "filled_up_warned": 0.681,
+      "filled_up_warned_spread_only": 0.665,
+      "false_alarm_rate": 0.006,
+      "full_on_arrival_if_count_shows_docks": 0.0636,
+      "full_on_arrival_if_we_say_likely": 0.0239,
+      "labels": {
+       "likely": {
+        "n": 19389,
+        "dock_open_rate": 0.976
+       },
+       "maybe": {
+        "n": 3368,
+        "dock_open_rate": 0.715
+       },
+       "unlikely": {
+        "n": 3024,
+        "dock_open_rate": 0.475
+       }
+      },
+      "brier_model": 0.072,
+      "brier_spread_only": 0.0717,
+      "brier_current_count": 0.1092
+     },
+     "15": {
+      "n": 20768,
+      "mae_model": 2.055,
+      "mae_current_count": 2.078,
+      "improvement": 0.011,
+      "filled_up_cases": 1281,
+      "filled_up_warned": 0.695,
+      "filled_up_warned_spread_only": 0.683,
+      "false_alarm_rate": 0.01,
+      "full_on_arrival_if_count_shows_docks": 0.07,
+      "full_on_arrival_if_we_say_likely": 0.026,
+      "labels": {
+       "likely": {
+        "n": 15040,
+        "dock_open_rate": 0.974
+       },
+       "maybe": {
+        "n": 3158,
+        "dock_open_rate": 0.729
+       },
+       "unlikely": {
+        "n": 2421,
+        "dock_open_rate": 0.518
+       }
+      },
+      "brier_model": 0.0785,
+      "brier_spread_only": 0.0779,
+      "brier_current_count": 0.1195
+     },
+     "20": {
+      "n": 15576,
+      "mae_model": 2.36,
+      "mae_current_count": 2.405,
+      "improvement": 0.019,
+      "filled_up_cases": 1017,
+      "filled_up_warned": 0.702,
+      "filled_up_warned_spread_only": 0.692,
+      "false_alarm_rate": 0.012,
+      "full_on_arrival_if_count_shows_docks": 0.074,
+      "full_on_arrival_if_we_say_likely": 0.0274,
+      "labels": {
+       "likely": {
+        "n": 11058,
+        "dock_open_rate": 0.973
+       },
+       "maybe": {
+        "n": 2580,
+        "dock_open_rate": 0.74
+       },
+       "unlikely": {
+        "n": 1832,
+        "dock_open_rate": 0.534
+       }
+      },
+      "brier_model": 0.0821,
+      "brier_spread_only": 0.0815,
+      "brier_current_count": 0.1251
+     },
+     "30": {
+      "n": 5192,
+      "mae_model": 2.818,
+      "mae_current_count": 2.905,
+      "improvement": 0.03,
+      "filled_up_cases": 351,
+      "filled_up_warned": 0.735,
+      "filled_up_warned_spread_only": 0.675,
+      "false_alarm_rate": 0.021,
+      "full_on_arrival_if_count_shows_docks": 0.0763,
+      "full_on_arrival_if_we_say_likely": 0.0261,
+      "labels": {
+       "likely": {
+        "n": 3563,
+        "dock_open_rate": 0.974
+       },
+       "maybe": {
+        "n": 995,
+        "dock_open_rate": 0.747
+       },
+       "unlikely": {
+        "n": 600,
+        "dock_open_rate": 0.57
+       }
+      },
+      "brier_model": 0.086,
+      "brier_spread_only": 0.0854,
+      "brier_current_count": 0.1268
+     }
+    },
+    "weekday rush hours": {
+     "5": {
+      "n": 23985,
+      "mae_model": 0.805,
+      "mae_current_count": 0.805,
+      "improvement": 0.0,
+      "filled_up_cases": 467,
+      "filled_up_warned": 0.709,
+      "filled_up_warned_spread_only": 0.681,
+      "false_alarm_rate": 0.001,
+      "full_on_arrival_if_count_shows_docks": 0.0209,
+      "full_on_arrival_if_we_say_likely": 0.0065,
+      "labels": {
+       "likely": {
+        "n": 20993,
+        "dock_open_rate": 0.994
+       },
+       "maybe": {
+        "n": 1325,
+        "dock_open_rate": 0.755
+       },
+       "unlikely": {
+        "n": 1511,
+        "dock_open_rate": 0.304
+       }
+      },
+      "brier_model": 0.0285,
+      "brier_spread_only": 0.0282,
+      "brier_current_count": 0.0383
+     },
+     "10": {
+      "n": 20670,
+      "mae_model": 1.265,
+      "mae_current_count": 1.275,
+      "improvement": 0.008,
+      "filled_up_cases": 565,
+      "filled_up_warned": 0.681,
+      "filled_up_warned_spread_only": 0.642,
+      "false_alarm_rate": 0.006,
+      "full_on_arrival_if_count_shows_docks": 0.0294,
+      "full_on_arrival_if_we_say_likely": 0.0102,
+      "labels": {
+       "likely": {
+        "n": 17712,
+        "dock_open_rate": 0.99
+       },
+       "maybe": {
+        "n": 1370,
+        "dock_open_rate": 0.747
+       },
+       "unlikely": {
+        "n": 1445,
+        "dock_open_rate": 0.435
+       }
+      },
+      "brier_model": 0.0379,
+      "brier_spread_only": 0.0371,
+      "brier_current_count": 0.0533
+     },
+     "15": {
+      "n": 17160,
+      "mae_model": 1.604,
+      "mae_current_count": 1.639,
+      "improvement": 0.022,
+      "filled_up_cases": 548,
+      "filled_up_warned": 0.677,
+      "filled_up_warned_spread_only": 0.642,
+      "false_alarm_rate": 0.01,
+      "full_on_arrival_if_count_shows_docks": 0.0344,
+      "full_on_arrival_if_we_say_likely": 0.0122,
+      "labels": {
+       "likely": {
+        "n": 14459,
+        "dock_open_rate": 0.988
+       },
+       "maybe": {
+        "n": 1264,
+        "dock_open_rate": 0.753
+       },
+       "unlikely": {
+        "n": 1308,
+        "dock_open_rate": 0.499
+       }
+      },
+      "brier_model": 0.0433,
+      "brier_spread_only": 0.0422,
+      "brier_current_count": 0.0625
+     },
+     "20": {
+      "n": 12870,
+      "mae_model": 1.878,
+      "mae_current_count": 1.946,
+      "improvement": 0.035,
+      "filled_up_cases": 454,
+      "filled_up_warned": 0.685,
+      "filled_up_warned_spread_only": 0.626,
+      "false_alarm_rate": 0.013,
+      "full_on_arrival_if_count_shows_docks": 0.038,
+      "full_on_arrival_if_we_say_likely": 0.0133,
+      "labels": {
+       "likely": {
+        "n": 10737,
+        "dock_open_rate": 0.987
+       },
+       "maybe": {
+        "n": 1021,
+        "dock_open_rate": 0.753
+       },
+       "unlikely": {
+        "n": 1033,
+        "dock_open_rate": 0.531
+       }
+      },
+      "brier_model": 0.0469,
+      "brier_spread_only": 0.0457,
+      "brier_current_count": 0.0684
+     },
+     "30": {
+      "n": 4290,
+      "mae_model": 2.243,
+      "mae_current_count": 2.364,
+      "improvement": 0.051,
+      "filled_up_cases": 158,
+      "filled_up_warned": 0.715,
+      "filled_up_warned_spread_only": 0.595,
+      "false_alarm_rate": 0.021,
+      "full_on_arrival_if_count_shows_docks": 0.0396,
+      "full_on_arrival_if_we_say_likely": 0.0128,
+      "labels": {
+       "likely": {
+        "n": 3524,
+        "dock_open_rate": 0.987
+       },
+       "maybe": {
+        "n": 386,
+        "dock_open_rate": 0.759
+       },
+       "unlikely": {
+        "n": 358,
+        "dock_open_rate": 0.575
+       }
+      },
+      "brier_model": 0.0505,
+      "brier_spread_only": 0.0493,
+      "brier_current_count": 0.0705
+     }
+    },
+    "weekday rush, 3 or fewer docks": {
+     "5": {
+      "n": 4894,
+      "mae_model": 0.627,
+      "mae_current_count": 0.626,
+      "improvement": -0.002,
+      "filled_up_cases": 444,
+      "filled_up_warned": 0.745,
+      "filled_up_warned_spread_only": 0.716,
+      "false_alarm_rate": 0.007,
+      "full_on_arrival_if_count_shows_docks": 0.1348,
+      "full_on_arrival_if_we_say_likely": 0.058,
+      "labels": {
+       "likely": {
+        "n": 1947,
+        "dock_open_rate": 0.942
+       },
+       "maybe": {
+        "n": 1325,
+        "dock_open_rate": 0.755
+       },
+       "unlikely": {
+        "n": 1511,
+        "dock_open_rate": 0.304
+       }
+      },
+      "brier_model": 0.137,
+      "brier_spread_only": 0.1359,
+      "brier_current_count": 0.1859
+     },
+     "10": {
+      "n": 4274,
+      "mae_model": 0.923,
+      "mae_current_count": 0.916,
+      "improvement": -0.007,
+      "filled_up_cases": 500,
+      "filled_up_warned": 0.762,
+      "filled_up_warned_spread_only": 0.726,
+      "false_alarm_rate": 0.047,
+      "full_on_arrival_if_count_shows_docks": 0.1743,
+      "full_on_arrival_if_we_say_likely": 0.086,
+      "labels": {
+       "likely": {
+        "n": 1383,
+        "dock_open_rate": 0.914
+       },
+       "maybe": {
+        "n": 1347,
+        "dock_open_rate": 0.746
+       },
+       "unlikely": {
+        "n": 1445,
+        "dock_open_rate": 0.435
+       }
+      },
+      "brier_model": 0.1717,
+      "brier_spread_only": 0.1675,
+      "brier_current_count": 0.2465
+     },
+     "15": {
+      "n": 3587,
+      "mae_model": 1.121,
+      "mae_current_count": 1.117,
+      "improvement": -0.003,
+      "filled_up_cases": 462,
+      "filled_up_warned": 0.786,
+      "filled_up_warned_spread_only": 0.762,
+      "false_alarm_rate": 0.083,
+      "full_on_arrival_if_count_shows_docks": 0.1934,
+      "full_on_arrival_if_we_say_likely": 0.1012,
+      "labels": {
+       "likely": {
+        "n": 978,
+        "dock_open_rate": 0.899
+       },
+       "maybe": {
+        "n": 1215,
+        "dock_open_rate": 0.75
+       },
+       "unlikely": {
+        "n": 1308,
+        "dock_open_rate": 0.499
+       }
+      },
+      "brier_model": 0.1872,
+      "brier_spread_only": 0.182,
+      "brier_current_count": 0.2793
+     },
+     "20": {
+      "n": 2665,
+      "mae_model": 1.278,
+      "mae_current_count": 1.28,
+      "improvement": 0.002,
+      "filled_up_cases": 355,
+      "filled_up_warned": 0.845,
+      "filled_up_warned_spread_only": 0.794,
+      "false_alarm_rate": 0.11,
+      "full_on_arrival_if_count_shows_docks": 0.2023,
+      "full_on_arrival_if_we_say_likely": 0.0877,
+      "labels": {
+       "likely": {
+        "n": 627,
+        "dock_open_rate": 0.912
+       },
+       "maybe": {
+        "n": 941,
+        "dock_open_rate": 0.744
+       },
+       "unlikely": {
+        "n": 1033,
+        "dock_open_rate": 0.531
+       }
+      },
+      "brier_model": 0.1951,
+      "brier_spread_only": 0.1894,
+      "brier_current_count": 0.2983
+     },
+     "30": {
+      "n": 891,
+      "mae_model": 1.503,
+      "mae_current_count": 1.493,
+      "improvement": -0.007,
+      "filled_up_cases": 108,
+      "filled_up_warned": 0.88,
+      "filled_up_warned_spread_only": 0.843,
+      "false_alarm_rate": 0.158,
+      "full_on_arrival_if_count_shows_docks": 0.1815,
+      "full_on_arrival_if_we_say_likely": 0.0688,
+      "labels": {
+       "likely": {
+        "n": 189,
+        "dock_open_rate": 0.931
+       },
+       "maybe": {
+        "n": 326,
+        "dock_open_rate": 0.767
+       },
+       "unlikely": {
+        "n": 355,
+        "dock_open_rate": 0.575
+       }
+      },
+      "brier_model": 0.198,
+      "brier_spread_only": 0.1912,
+      "brier_current_count": 0.2885
+     }
+    }
+   }
+  },
+  "ours": {
+   "span": "Sep 26 13:06 - Sep 26 14:02",
+   "stations": 2442,
+   "by_subset": {
+    "all": {
+     "5": {
+      "n": 21978,
+      "mae_model": 0.314,
+      "mae_current_count": 0.314,
+      "improvement": -0.0,
+      "filled_up_cases": 200,
+      "filled_up_warned": 0.705,
+      "filled_up_warned_spread_only": 0.71,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0099,
+      "full_on_arrival_if_we_say_likely": 0.0031,
+      "labels": {
+       "likely": {
+        "n": 19142,
+        "dock_open_rate": 0.997
+       },
+       "maybe": {
+        "n": 1027,
+        "dock_open_rate": 0.862
+       },
+       "unlikely": {
+        "n": 1672,
+        "dock_open_rate": 0.121
+       }
+      },
+      "brier_model": 0.0181,
+      "brier_spread_only": 0.0182,
+      "brier_current_count": 0.0185
+     },
+     "10": {
+      "n": 21978,
+      "mae_model": 0.503,
+      "mae_current_count": 0.503,
+      "improvement": 0.0,
+      "filled_up_cases": 300,
+      "filled_up_warned": 0.743,
+      "filled_up_warned_spread_only": 0.73,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0149,
+      "full_on_arrival_if_we_say_likely": 0.0041,
+      "labels": {
+       "likely": {
+        "n": 18792,
+        "dock_open_rate": 0.996
+       },
+       "maybe": {
+        "n": 1368,
+        "dock_open_rate": 0.836
+       },
+       "unlikely": {
+        "n": 1680,
+        "dock_open_rate": 0.188
+       }
+      },
+      "brier_model": 0.0242,
+      "brier_spread_only": 0.0242,
+      "brier_current_count": 0.0284
+     },
+     "15": {
+      "n": 19536,
+      "mae_model": 0.656,
+      "mae_current_count": 0.656,
+      "improvement": -0.0,
+      "filled_up_cases": 332,
+      "filled_up_warned": 0.756,
+      "filled_up_warned_spread_only": 0.753,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0185,
+      "full_on_arrival_if_we_say_likely": 0.0049,
+      "labels": {
+       "likely": {
+        "n": 16508,
+        "dock_open_rate": 0.995
+       },
+       "maybe": {
+        "n": 1410,
+        "dock_open_rate": 0.819
+       },
+       "unlikely": {
+        "n": 1495,
+        "dock_open_rate": 0.238
+       }
+      },
+      "brier_model": 0.0283,
+      "brier_spread_only": 0.0283,
+      "brier_current_count": 0.0356
+     },
+     "20": {
+      "n": 17094,
+      "mae_model": 0.784,
+      "mae_current_count": 0.784,
+      "improvement": 0.0,
+      "filled_up_cases": 336,
+      "filled_up_warned": 0.765,
+      "filled_up_warned_spread_only": 0.765,
+      "false_alarm_rate": 0.001,
+      "full_on_arrival_if_count_shows_docks": 0.0215,
+      "full_on_arrival_if_we_say_likely": 0.0055,
+      "labels": {
+       "likely": {
+        "n": 14311,
+        "dock_open_rate": 0.994
+       },
+       "maybe": {
+        "n": 1365,
+        "dock_open_rate": 0.806
+       },
+       "unlikely": {
+        "n": 1310,
+        "dock_open_rate": 0.269
+       }
+      },
+      "brier_model": 0.0312,
+      "brier_spread_only": 0.0313,
+      "brier_current_count": 0.0408
+     },
+     "30": {
+      "n": 12210,
+      "mae_model": 1.003,
+      "mae_current_count": 1.003,
+      "improvement": 0.0,
+      "filled_up_cases": 282,
+      "filled_up_warned": 0.688,
+      "filled_up_warned_spread_only": 0.702,
+      "false_alarm_rate": 0.001,
+      "full_on_arrival_if_count_shows_docks": 0.0252,
+      "full_on_arrival_if_we_say_likely": 0.0087,
+      "labels": {
+       "likely": {
+        "n": 10069,
+        "dock_open_rate": 0.991
+       },
+       "maybe": {
+        "n": 1133,
+        "dock_open_rate": 0.827
+       },
+       "unlikely": {
+        "n": 931,
+        "dock_open_rate": 0.304
+       }
+      },
+      "brier_model": 0.0356,
+      "brier_spread_only": 0.0359,
+      "brier_current_count": 0.0468
+     }
+    },
+    "3 or fewer docks open now": {
+     "5": {
+      "n": 6159,
+      "mae_model": 0.221,
+      "mae_current_count": 0.221,
+      "improvement": 0.0,
+      "filled_up_cases": 194,
+      "filled_up_warned": 0.727,
+      "filled_up_warned_spread_only": 0.732,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0443,
+      "full_on_arrival_if_we_say_likely": 0.0158,
+      "labels": {
+       "likely": {
+        "n": 3362,
+        "dock_open_rate": 0.984
+       },
+       "maybe": {
+        "n": 1024,
+        "dock_open_rate": 0.861
+       },
+       "unlikely": {
+        "n": 1672,
+        "dock_open_rate": 0.121
+       }
+      },
+      "brier_model": 0.0644,
+      "brier_spread_only": 0.0644,
+      "brier_current_count": 0.0655
+     },
+     "10": {
+      "n": 6199,
+      "mae_model": 0.358,
+      "mae_current_count": 0.358,
+      "improvement": 0.001,
+      "filled_up_cases": 288,
+      "filled_up_warned": 0.774,
+      "filled_up_warned_spread_only": 0.76,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0653,
+      "full_on_arrival_if_we_say_likely": 0.0213,
+      "labels": {
+       "likely": {
+        "n": 3052,
+        "dock_open_rate": 0.979
+       },
+       "maybe": {
+        "n": 1365,
+        "dock_open_rate": 0.836
+       },
+       "unlikely": {
+        "n": 1680,
+        "dock_open_rate": 0.188
+       }
+      },
+      "brier_model": 0.0845,
+      "brier_spread_only": 0.0846,
+      "brier_current_count": 0.0997
+     },
+     "15": {
+      "n": 5524,
+      "mae_model": 0.467,
+      "mae_current_count": 0.467,
+      "improvement": 0.001,
+      "filled_up_cases": 310,
+      "filled_up_warned": 0.81,
+      "filled_up_warned_spread_only": 0.806,
+      "false_alarm_rate": 0.001,
+      "full_on_arrival_if_count_shows_docks": 0.0789,
+      "full_on_arrival_if_we_say_likely": 0.0233,
+      "labels": {
+       "likely": {
+        "n": 2532,
+        "dock_open_rate": 0.977
+       },
+       "maybe": {
+        "n": 1406,
+        "dock_open_rate": 0.819
+       },
+       "unlikely": {
+        "n": 1495,
+        "dock_open_rate": 0.238
+       }
+      },
+      "brier_model": 0.0971,
+      "brier_spread_only": 0.0973,
+      "brier_current_count": 0.1231
+     },
+     "20": {
+      "n": 4840,
+      "mae_model": 0.555,
+      "mae_current_count": 0.557,
+      "improvement": 0.004,
+      "filled_up_cases": 310,
+      "filled_up_warned": 0.829,
+      "filled_up_warned_spread_only": 0.829,
+      "false_alarm_rate": 0.003,
+      "full_on_arrival_if_count_shows_docks": 0.0902,
+      "full_on_arrival_if_we_say_likely": 0.0253,
+      "labels": {
+       "likely": {
+        "n": 2093,
+        "dock_open_rate": 0.975
+       },
+       "maybe": {
+        "n": 1357,
+        "dock_open_rate": 0.805
+       },
+       "unlikely": {
+        "n": 1310,
+        "dock_open_rate": 0.269
+       }
+      },
+      "brier_model": 0.1059,
+      "brier_spread_only": 0.1063,
+      "brier_current_count": 0.1401
+     },
+     "30": {
+      "n": 3458,
+      "mae_model": 0.682,
+      "mae_current_count": 0.687,
+      "improvement": 0.007,
+      "filled_up_cases": 247,
+      "filled_up_warned": 0.777,
+      "filled_up_warned_spread_only": 0.785,
+      "false_alarm_rate": 0.005,
+      "full_on_arrival_if_count_shows_docks": 0.1002,
+      "full_on_arrival_if_we_say_likely": 0.0402,
+      "labels": {
+       "likely": {
+        "n": 1367,
+        "dock_open_rate": 0.96
+       },
+       "maybe": {
+        "n": 1103,
+        "dock_open_rate": 0.824
+       },
+       "unlikely": {
+        "n": 931,
+        "dock_open_rate": 0.304
+       }
+      },
+      "brier_model": 0.1173,
+      "brier_spread_only": 0.1186,
+      "brier_current_count": 0.1567
+     }
+    },
+    "busiest 10% of stations": {
+     "5": {
+      "n": 2142,
+      "mae_model": 1.068,
+      "mae_current_count": 1.067,
+      "improvement": -0.0,
+      "filled_up_cases": 38,
+      "filled_up_warned": 0.658,
+      "filled_up_warned_spread_only": 0.658,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0189,
+      "full_on_arrival_if_we_say_likely": 0.007,
+      "labels": {
+       "likely": {
+        "n": 1863,
+        "dock_open_rate": 0.993
+       },
+       "maybe": {
+        "n": 146,
+        "dock_open_rate": 0.822
+       },
+       "unlikely": {
+        "n": 88,
+        "dock_open_rate": 0.42
+       }
+      },
+      "brier_model": 0.0283,
+      "brier_spread_only": 0.0282,
+      "brier_current_count": 0.0362
+     },
+     "10": {
+      "n": 2142,
+      "mae_model": 1.59,
+      "mae_current_count": 1.591,
+      "improvement": 0.0,
+      "filled_up_cases": 54,
+      "filled_up_warned": 0.648,
+      "filled_up_warned_spread_only": 0.648,
+      "false_alarm_rate": 0.0,
+      "full_on_arrival_if_count_shows_docks": 0.0269,
+      "full_on_arrival_if_we_say_likely": 0.0104,
+      "labels": {
+       "likely": {
+        "n": 1819,
+        "dock_open_rate": 0.99
+       },
+       "maybe": {
+        "n": 193,
+        "dock_open_rate": 0.819
+       },
+       "unlikely": {
+        "n": 85,
+        "dock_open_rate": 0.588
+       }
+      },
+      "brier_model": 0.0359,
+      "brier_spread_only": 0.0358,
+      "brier_current_count": 0.051
+     },
+     "15": {
+      "n": 1904,
+      "mae_model": 1.982,
+      "mae_current_count": 1.982,
+      "improvement": -0.0,
+      "filled_up_cases": 54,
+      "filled_up_warned": 0.704,
+      "filled_up_warned_spread_only": 0.685,
+      "false_alarm_rate": 0.002,
+      "full_on_arrival_if_count_shows_docks": 0.0302,
+      "full_on_arrival_if_we_say_likely": 0.0101,
+      "labels": {
+       "likely": {
+        "n": 1578,
+        "dock_open_rate": 0.99
+       },
+       "maybe": {
+        "n": 210,
+        "dock_open_rate": 0.819
+       },
+       "unlikely": {
+        "n": 76,
+        "dock_open_rate": 0.645
+       }
+      },
+      "brier_model": 0.0395,
+      "brier_spread_only": 0.0394,
+      "brier_current_count": 0.0547
+     },
+     "20": {
+      "n": 1666,
+      "mae_model": 2.319,
+      "mae_current_count": 2.323,
+      "improvement": 0.002,
+      "filled_up_cases": 58,
+      "filled_up_warned": 0.759,
+      "filled_up_warned_spread_only": 0.759,
+      "false_alarm_rate": 0.003,
+      "full_on_arrival_if_count_shows_docks": 0.0371,
+      "full_on_arrival_if_we_say_likely": 0.0102,
+      "labels": {
+       "likely": {
+        "n": 1370,
+        "dock_open_rate": 0.99
+       },
+       "maybe": {
+        "n": 193,
+        "dock_open_rate": 0.772
+       },
+       "unlikely": {
+        "n": 68,
+        "dock_open_rate": 0.706
+       }
+      },
+      "brier_model": 0.0429,
+      "brier_spread_only": 0.0427,
+      "brier_current_count": 0.0638
+     },
+     "30": {
+      "n": 1190,
+      "mae_model": 2.856,
+      "mae_current_count": 2.867,
+      "improvement": 0.004,
+      "filled_up_cases": 42,
+      "filled_up_warned": 0.643,
+      "filled_up_warned_spread_only": 0.738,
+      "false_alarm_rate": 0.002,
+      "full_on_arrival_if_count_shows_docks": 0.0376,
+      "full_on_arrival_if_we_say_likely": 0.0155,
+      "labels": {
+       "likely": {
+        "n": 965,
+        "dock_open_rate": 0.984
+       },
+       "maybe": {
+        "n": 151,
+        "dock_open_rate": 0.841
+       },
+       "unlikely": {
+        "n": 49,
+        "dock_open_rate": 0.633
+       }
+      },
+      "brier_model": 0.0447,
+      "brier_spread_only": 0.0444,
+      "brier_current_count": 0.0635
+     }
+    },
+    "weekday rush hours": {},
+    "weekday rush, 3 or fewer docks": {}
+   }
+  }
+ }
+}

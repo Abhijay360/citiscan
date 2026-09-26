@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.basemap {
+  filter: grayscale(1) brightness(1.06) contrast(0.8);
+}
+
+/* numbered backup stations on the map */
+.leaflet-tooltip.alt-label {
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+  font-weight: 700;
+  padding: 0 5px;
+}
+.leaflet-tooltip.alt-label::before {
+  display: none;
+}

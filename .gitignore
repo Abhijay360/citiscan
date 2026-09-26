@@ -8,3 +8,7 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+
+# written by `vercel link` / `vercel pull`
+.vercel
+.env*

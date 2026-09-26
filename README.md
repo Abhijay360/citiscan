@@ -174,8 +174,9 @@ python3 pipeline/make_replays.py
 # 4. run the web app -> http://localhost:3000
 cd web && npm install && npm run dev
 
-# 5. deploy (after `npx vercel login` once)
-cd web && npx vercel deploy --prod
+# 5. deploy: pushes to main deploy automatically (the Vercel project's Root Directory is web/).
+#    To deploy by hand, run this from the repo root after `npx vercel login` once:
+npx vercel deploy --prod
 ```
 
 ## Project layout

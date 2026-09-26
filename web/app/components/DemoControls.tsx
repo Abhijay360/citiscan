@@ -17,6 +17,7 @@ type Props = {
   setReplayId: (id: string) => void;
   reveal: boolean;
   setReveal: (r: boolean) => void;
+  onTryScenario: (stationName: string, docks: number) => void;
 };
 
 const TABS: [Demo, string][] = [
@@ -63,9 +64,12 @@ export default function DemoControls(p: Props) {
             />
           </div>
           <p className="mt-1.5">
-            Uses the flows for that day and time on today&apos;s live counts. Pick a station to set how many docks it has
-            open.
+            Uses the flows for that day and time on today&apos;s live counts. Pick a station to set how many docks it
+            has open.
           </p>
+          <button onClick={() => p.onTryScenario("E 47 St & Park Ave", 6)} className="mt-1.5 font-medium underline">
+            Try: Midtown office block, 6 open docks
+          </button>
         </div>
       )}
 
@@ -84,7 +88,8 @@ export default function DemoControls(p: Props) {
           </select>
           {replay && (
             <p className="mt-1.5">
-              Real counts logged at that moment ({replay.source}). See what we would have predicted, then what happened.
+              Real counts logged at that moment ({replay.source}). See what we would have predicted, then tap a red
+              station to see what happened.
             </p>
           )}
           <label className="mt-1.5 flex items-center gap-1.5 font-medium">

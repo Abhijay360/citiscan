@@ -7,12 +7,13 @@ import type { StationPrediction } from "@/lib/types";
 type Props = {
   stations: StationPrediction[];
   onPick: (place: Place) => void;
+  initialQuery?: string; // what the box shows when the destination was set elsewhere (map tap, demo shortcut)
 };
 
 // Station names match as you type; Enter looks the text up as an address with OpenStreetMap's Nominatim
 // geocoder (their usage policy allows lookups on submit, not per keystroke).
-export default function PlaceSearch({ stations, onPick }: Props) {
-  const [query, setQuery] = useState("");
+export default function PlaceSearch({ stations, onPick, initialQuery = "" }: Props) {
+  const [query, setQuery] = useState(initialQuery);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -79,7 +80,9 @@ export default function PlaceSearch({ stations, onPick }: Props) {
               </button>
             </li>
           ))}
-          <li className="border-t border-gray-100 px-3 py-1.5 text-xs text-gray-500">Press Enter to search as an address</li>
+          <li className="border-t border-gray-100 px-3 py-1.5 text-xs text-gray-500">
+            Press Enter to search as an address
+          </li>
         </ul>
       )}
       {status && <p className="mt-1 text-xs text-gray-600">{status}</p>}

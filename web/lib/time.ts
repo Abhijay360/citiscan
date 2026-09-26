@@ -5,7 +5,13 @@ const TZ = "America/New_York";
 /** YYYY-MM-DD and weekday of an instant, in New York. */
 function nycDate(t: Date) {
   const p = Object.fromEntries(
-    new Intl.DateTimeFormat("en-US", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit", weekday: "short" })
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: TZ,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "short",
+    })
       .formatToParts(t)
       .map((x) => [x.type, x.value]),
   );

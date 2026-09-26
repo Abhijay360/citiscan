@@ -25,7 +25,9 @@ export async function GET(req: NextRequest) {
   }
 
   const now = replay ? new Date(replay.now) : q.get("now") ? new Date(q.get("now")!) : new Date();
-  let minutes = q.get("at") ? (new Date(q.get("at")!).getTime() - now.getTime()) / 60_000 : Number(q.get("minutes") ?? 15);
+  let minutes = q.get("at")
+    ? (new Date(q.get("at")!).getTime() - now.getTime()) / 60_000
+    : Number(q.get("minutes") ?? 15);
   let offsetIndex = 0;
   if (replay) {
     // replays only know the counts every 5 minutes: snap to the nearest logged offset
@@ -38,14 +40,21 @@ export async function GET(req: NextRequest) {
   const at = new Date(now.getTime() + minutes * 60_000);
 
   const [table, live] = await Promise.all([loadFlowTable(), getLiveStations().catch(() => null)]);
-  if (!live) return Response.json({ error: "Couldn't reach Citi Bike's live feed. Try again in a minute." }, { status: 503 });
+  if (!live)
+    return Response.json({ error: "Couldn't reach Citi Bike's live feed. Try again in a minute." }, { status: 503 });
 
   let stations: LiveStation[] = live.stations;
   if (replay) {
     const logged = replay.stations;
     stations = stations
       .filter((s) => logged[s.id])
-      .map((s) => ({ ...s, docks: logged[s.id].docks[0], bikes: logged[s.id].bikes[0], isRenting: true, isReturning: true }));
+      .map((s) => ({
+        ...s,
+        docks: logged[s.id].docks[0],
+        bikes: logged[s.id].bikes[0],
+        isRenting: true,
+        isReturning: true,
+      }));
   }
   const [overrideId, overrideDocks] = (q.get("override") ?? "").split(":");
   if (overrideId) {

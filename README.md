@@ -8,15 +8,19 @@ when you get there.**
 CitiScan predicts open docks (and bikes) at a station at your arrival time, 10 to 30 minutes from now, and
 suggests nearby stations when your destination is likely to be full. Built for HackColumbia (Move Smarter track).
 
+**Live demo: https://citiscan.vercel.app**
+
 > CitiScan is an independent hackathon project built on Citi Bike's public data. It is not affiliated with or
 > endorsed by Citi, Citi Bike or Lyft.
 
-**Live demo: https://citiscan.vercel.app**
+**The headline:** trust the current count and the station is full when you arrive about 1 in 20 times. Go where
+CitiScan says *likely* and it's about 1 in 53: **62% fewer surprise full stations** (92,040 predictions on real
+September dock counts, 15 minutes ahead).
 
-On a Saturday at 1pm, 208 of 2,442 stations were completely full and 555 had two or fewer open docks. On a
-weekday morning a Midtown station like E 47 St & Park Ave gains about 44 bikes in the 7am hour alone.
+Why it matters: on a Saturday at 1pm, 208 of 2,442 stations were completely full and 555 had two or fewer open
+docks. On a weekday morning a Midtown station like E 47 St & Park Ave gains about 44 bikes in the 7am hour alone.
 
-## How the prediction works
+## How it works
 
 1. **Live state.** Citi Bike's public [GBFS feed](https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json) gives open
    docks and bikes at every station, updated every minute.
@@ -42,18 +46,18 @@ weekday morning a Midtown station like E 47 St & Park Ave gains about 44 bikes i
 
 ### On real dock counts
 
-Two sources of ground truth, both after our June-August training data:
-**Brooklyn**, a public archive of 5-minute snapshots of 195 Williamsburg/Greenpoint stations, September 1-25
-(weekdays and weekends, including rush hours), and **our own log** of all 2,442 stations, every minute
-(started Saturday September 26). Numbers are for arriving 15 minutes from now.
+Two sources of ground truth, both after our June-August training data: **Brooklyn**, a public archive of
+5-minute snapshots of 195 Williamsburg/Greenpoint stations, September 1-25 (weekdays and weekends, including
+rush hours), and **our own log** of all 2,442 stations, every minute, from Saturday September 26 (weekend
+only so far). Numbers are for arriving 15 minutes from now. The app's "How accurate is this?" panel shows them.
 
 | | Brooklyn, Sep 1-25 | All NYC, our log |
 |---|---|---|
-| Station full on arrival when the current count showed open docks | 4.9% | 1.8% |
+| Station full on arrival when the current count showed open docks | 4.9% | 1.9% |
 | Station full on arrival when we said **likely** | **1.9%** | **0.5%** |
-| Stations that filled up before you arrived that we warned about (maybe/unlikely) | 66% of 4,052 | 76% of 332 |
+| Stations that filled up before you arrived that we warned about (maybe/unlikely) | 66% of 4,052 | 74% of 639 |
 | We said **unlikely** but a dock was open | 0.4% | 0.0% |
-| Probability score (Brier, lower is better): ours vs trusting the current count | 0.059 vs 0.085 (**31% better**) | 0.028 vs 0.036 (21% better) |
+| Probability score (Brier, lower is better): ours vs trusting the current count | 0.059 vs 0.085 (**31% better**) | 0.029 vs 0.036 (21% better) |
 
 When we said *likely*, a dock was open 98% of the time; *maybe*, 73%; *unlikely*, 40% (Brooklyn). The
 current count can't warn you at all: it only knows about now.
@@ -61,7 +65,7 @@ current count can't warn you at all: it only knows about now.
 What we learned, honestly:
 
 - **Exact counts 15 minutes out are mostly noise.** Our predicted open-dock counts beat "the count stays the
-  same" by only 1-5% (most in weekday rush hours at 30 minutes). The main edge is knowing *how volatile* each
+  same" by only 1-5% (5% in weekday rush hours at 30 minutes). The main edge is knowing *how volatile* each
   station is at each time of day, which drives the labels. A version with the same volatility but no expected
   flow scores about the same probability score; the flow adds a little on weekday commutes.
 - **Trip flows overstate real dock changes**: about 0.8x on weekdays and 0.35x on weekends. We fit those factors
@@ -95,21 +99,25 @@ The actual change landed inside our 80% range 82% of the time at 15 minutes and 
 
 ## Using the app
 
-- **Map**: every station, colored by the chance of an open dock (or a bike, with the toggle) when you arrive.
+- **Map**: every station, colored by the chance of an open dock (or a bike, with the toggle) when you arrive:
+  blue *likely*, amber *maybe*, red *likely full*. The colors pass a colorblind check across every pair, and
+  riskier stations are drawn bigger so color is never the only cue.
 - **Plan a trip**: search a station name or an address (or tap the map) for where you're going. Set a start
   point (your location, or tap the map) and the arrival time comes from the distance and real riding speeds:
   12.3 km/h straight-line on an e-bike, 9.4 km/h on a classic bike, measured from member trips. Without a start
   point, use the "arriving in" slider.
 - **Backups**: if the destination isn't "likely", we list up to 3 stations within 1 km where a dock is likely,
   closest first, with the walking time to your destination (4.8 km/h, 1.3x the straight-line distance).
+- **How accurate is this?** opens the backtest results: the headline, warnings and false alarms, and how often
+  each label came true, for both test sets.
 - Stations that aren't accepting bikes right now, have no trip history, or where Citi Bike moves bikes by truck
-  or valet are called out on the card.
+  or valet are called out on the card. On a phone, "Hide" shrinks the panel to one line.
 
 ### Demo modes
 
 - **What if…**: pick weekday / Saturday / Sunday and a time (say, a weekday at 8:45am). Predictions use that
   time's flows on today's live counts, and a slider sets how many docks the destination has open right now.
-  Try E 47 St & Park Ave with 6 open docks on a weekday at 8:45am.
+  The "Try" link loads E 47 St & Park Ave with 6 open docks.
 - **Replay**: real moments from the logs, e.g. Williamsburg on Friday September 18 at 9:25pm, when 24 stations
   that had open docks were full 15 minutes later (we flagged 18). The app shows what it would have predicted,
   a scorecard, and what actually happened at each station; a toggle recolors the map by the real outcome.
@@ -119,6 +127,21 @@ The actual change landed inside our 80% range 82% of the time at 15 minutes and 
 API: `GET /api/predict?minutes=15` (or `?at=<ISO time>`) returns every station with its live counts, expected
 change, predicted docks and bikes, and the chance of each. Demo options: `&now=<ISO>` (flows for another time),
 `&override=<station_id>:<docks>`, `&replay=<id>` (from `GET /api/replays`).
+
+## Two-minute demo script
+
+1. **The problem (live map).** Open https://citiscan.vercel.app. "Every dot is a Citi Bike station. The app you
+   know shows docks right now; red means CitiScan expects it to be full by the time you get there."
+2. **A real trip.** Search a station, tap "Pick on map" and drop a start point. "It works out the ride time from
+   real trip speeds and predicts the dock count at arrival. If it's not a safe bet, it lists backups nearby."
+3. **Rush hour (What if…).** Click "Try: Midtown office block, 6 open docks". "Weekday 8:45am, E 47 St & Park Ave
+   shows 6 open docks. Bikes pour in at that hour, so CitiScan says *maybe*, about 2 docks left, and lists
+   backup stations a few minutes' walk away."
+4. **Proof (Replay).** Pick "Williamsburg area, Fri Sep 18, 9:25pm". "These are real counts from that night. 24
+   stations with open docks were full 15 minutes later; we flagged 18 of them in advance." Tick "Color the map
+   by what actually happened" and tap a red station to show "✓ we called it".
+5. **The number.** Open "How accurate is this?": "62% fewer surprise full stations, tested on 92,000
+   predictions against real dock counts the model never saw."
 
 ## Running it
 
@@ -136,7 +159,8 @@ cd ../..
 # 2. build the lookup table -> web/data/flow_table.json (about 90s the first time, cached after)
 python3 pipeline/build_flow_table.py
 
-# 3. log live snapshots for the backtest (leave running; on macOS prefix with `caffeinate -i`)
+# 3. log live snapshots for the backtest. Leave it running; on macOS use `caffeinate -i` and keep the laptop
+#    plugged in with the lid open (a closed lid sleeps the Mac and pauses logging).
 python3 pipeline/snapshot_logger.py
 
 # 3b. backtest against the logs and the Brooklyn archive -> web/data/backtest.json
@@ -166,8 +190,9 @@ web/
   app/api/predict/      live feed + flow table -> predictions for every station (+ what-if / replay)
   app/api/replays/      the replay moments available
   lib/predict.ts        the prediction math (mirrored in the Python backtest)
-  app/components/       map (Leaflet), search, trip card
-  data/flow_table.json  output of build_flow_table.py
+  lib/accuracy.ts       backtest results -> the "How accurate is this?" panel
+  app/components/       map (Leaflet), search, trip card, demo controls, accuracy panel
+  data/                 flow_table.json, backtest.json, replays.json (outputs of the pipeline)
 data/                   raw downloads, logs, caches (not committed)
 ```
 
@@ -179,7 +204,8 @@ data/                   raw downloads, logs, caches (not committed)
 - **Brooklyn snapshot archive** (extra weekday validation data):
   [smturzo/citibike-williamsburg](https://github.com/smturzo/citibike-williamsburg), 5-minute snapshots of 195
   stations, August 26 to September 25, 2026
-- **Open-Meteo** (optional weather feature): https://open-meteo.com, no API key needed
+- **Map**: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors; addresses via OpenStreetMap
+  Nominatim.
 
 Citi Bike data is provided by Lyft under the
 [Citi Bike Data License Agreement](https://citibikenyc.com/data-sharing-policy).

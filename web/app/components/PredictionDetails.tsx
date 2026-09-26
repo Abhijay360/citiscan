@@ -4,7 +4,11 @@ import { LABEL_COLORS, LABEL_TEXT, NO_DATA_COLOR } from "./colors";
 export type Mode = "dock" | "bike";
 
 export function formatTime(iso: string) {
-  return new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "2-digit" });
+  return new Date(iso).toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 export function LabelChip({ label, hasHistory, small }: { label: Label; hasHistory: boolean; small?: boolean }) {
@@ -26,7 +30,15 @@ function describeChange(change: number) {
 }
 
 /** Now vs. at arrival for one station: label, chance, predicted count, and why. */
-export default function PredictionDetails({ station: s, mode, at }: { station: StationPrediction; mode: Mode; at: string }) {
+export default function PredictionDetails({
+  station: s,
+  mode,
+  at,
+}: {
+  station: StationPrediction;
+  mode: Mode;
+  at: string;
+}) {
   const isDock = mode === "dock";
   const label = isDock ? s.dockLabel : s.bikeLabel;
   const chance = Math.round((isDock ? s.pDock : s.pBike) * 100);
@@ -58,7 +70,9 @@ export default function PredictionDetails({ station: s, mode, at }: { station: S
         </p>
       )}
       {!s.hasHistory && (
-        <p className="mt-2 text-xs text-gray-500">New station with no trip history yet: we assume the count stays the same.</p>
+        <p className="mt-2 text-xs text-gray-500">
+          New station with no trip history yet: we assume the count stays the same.
+        </p>
       )}
     </div>
   );

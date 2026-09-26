@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { Place } from "@/lib/geo";
 import type { StationPrediction } from "@/lib/types";
-import { LABEL_COLORS, NO_DATA_COLOR } from "./colors";
+import { LABEL_COLORS, LABEL_RADIUS, LABEL_TEXT, NO_DATA_COLOR } from "./colors";
 
 type Props = {
   stations: StationPrediction[];
@@ -60,16 +60,17 @@ export default function StationMap(props: Props) {
     for (const s of stations) {
       const selected = s.id === selectedId;
       const altIndex = alternativeIds.indexOf(s.id);
-      const label = mode === "dock" ? s.dockLabel : s.bikeLabel;
-      const actual = mode === "dock" ? s.actualDocks : s.actualBikes;
-      const fill =
+      const isDock = mode === "dock";
+      const actual = isDock ? s.actualDocks : s.actualBikes;
+      const shown =
+        reveal && actual !== undefined ? (actual >= 1 ? "likely" : "unlikely") : isDock ? s.dockLabel : s.bikeLabel;
+      const fill = reveal || s.hasHistory ? LABEL_COLORS[shown] : NO_DATA_COLOR;
+      const tip =
         reveal && actual !== undefined
-          ? LABEL_COLORS[actual >= 1 ? "likely" : "unlikely"]
-          : s.hasHistory
-            ? LABEL_COLORS[label]
-            : NO_DATA_COLOR;
+          ? `${s.name}: actually ${actual} ${isDock ? "open docks" : "bikes"}`
+          : `${s.name}: ${LABEL_TEXT[shown]}, ${Math.round((isDock ? s.pDock : s.pBike) * 100)}% chance of ${isDock ? "a dock" : "a bike"}`;
       const marker = L.circleMarker([s.lat, s.lon], {
-        radius: selected ? 10 : altIndex >= 0 ? 8 : 5,
+        radius: selected ? 10 : altIndex >= 0 ? 8 : LABEL_RADIUS[shown],
         color: selected || altIndex >= 0 ? "#111827" : "#ffffff",
         weight: selected ? 3 : altIndex >= 0 ? 2 : 1,
         fillColor: fill,
@@ -79,7 +80,7 @@ export default function StationMap(props: Props) {
       if (altIndex >= 0) {
         marker.bindTooltip(String(altIndex + 1), { permanent: true, direction: "right", className: "alt-label" });
       } else {
-        marker.bindTooltip(s.name);
+        marker.bindTooltip(tip);
       }
       marker.addTo(group);
     }
@@ -96,12 +97,25 @@ export default function StationMap(props: Props) {
     if (!group) return;
     group.clearLayers();
     if (origin) {
-      L.circleMarker([origin.lat, origin.lon], { radius: 8, color: "#ffffff", weight: 3, fillColor: "#2563eb", fillOpacity: 1 })
+      // a hollow ring, so the start can't be mistaken for a station
+      L.circleMarker([origin.lat, origin.lon], {
+        radius: 7,
+        color: "#111827",
+        weight: 3,
+        fillColor: "#ffffff",
+        fillOpacity: 1,
+      })
         .bindTooltip(`Start: ${origin.label}`)
         .addTo(group);
     }
     if (destination) {
-      L.circleMarker([destination.lat, destination.lon], { radius: 4, color: "#111827", weight: 2, fillColor: "#111827", fillOpacity: 1 })
+      L.circleMarker([destination.lat, destination.lon], {
+        radius: 4,
+        color: "#111827",
+        weight: 2,
+        fillColor: "#111827",
+        fillOpacity: 1,
+      })
         .bindTooltip(`Destination: ${destination.label}`)
         .addTo(group);
     }

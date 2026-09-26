@@ -33,12 +33,22 @@ function Outcome({ station: s, mode, at }: { station: StationPrediction; mode: M
   return (
     <div className="mt-2 rounded-lg bg-violet-50 px-2.5 py-1.5 text-sm">
       What actually happened at {formatTime(at)}: <b>{actual}</b> {isDock ? "open docks" : "bikes"}
-      {!available && (isDock ? " (full)" : " (empty)")} · <span className={`font-semibold ${verdict.color}`}>{verdict.text}</span>
+      {!available && (isDock ? " (full)" : " (empty)")} ·{" "}
+      <span className={`font-semibold ${verdict.color}`}>{verdict.text}</span>
     </div>
   );
 }
 
-export default function TripCard({ station, destination, mode, at, travelNote, alternatives, demo, onOverride }: Props) {
+export default function TripCard({
+  station,
+  destination,
+  mode,
+  at,
+  travelNote,
+  alternatives,
+  demo,
+  onOverride,
+}: Props) {
   const isDock = mode === "dock";
   const label = isDock ? station.dockLabel : station.bikeLabel;
   const toDestination = distanceMeters(station, destination);
@@ -92,12 +102,17 @@ export default function TripCard({ station, destination, mode, at, travelNote, a
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="truncate leading-tight">{a.station.name}</span>
-                      <LabelChip small label={isDock ? a.station.dockLabel : a.station.bikeLabel} hasHistory={a.station.hasHistory} />
+                      <LabelChip
+                        small
+                        label={isDock ? a.station.dockLabel : a.station.bikeLabel}
+                        hasHistory={a.station.hasHistory}
+                      />
                     </div>
                     <div className="text-xs text-gray-600">
                       {Math.round((isDock ? a.station.pDock : a.station.pBike) * 100)}% chance · ~
-                      {Math.round(isDock ? a.station.predictedDocks : a.station.predictedBikes)} {isDock ? "docks" : "bikes"} ·{" "}
-                      {walkText(a.meters)} {pickedStation ? "away" : "to your destination"}
+                      {Math.round(isDock ? a.station.predictedDocks : a.station.predictedBikes)}{" "}
+                      {isDock ? "docks" : "bikes"} · {walkText(a.meters)}{" "}
+                      {pickedStation ? "away" : "to your destination"}
                       {actual !== undefined && ` · actually had ${actual}`}
                     </div>
                   </div>

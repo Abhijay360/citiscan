@@ -34,3 +34,9 @@ body {
 .leaflet-tooltip.alt-label::before {
   display: none;
 }
+
+/* Leaflet can leave hairline seams between tiles on high-density screens: overlap them by half a pixel */
+.leaflet-tile-container img.leaflet-tile {
+  width: 256.5px !important;
+  height: 256.5px !important;
+}

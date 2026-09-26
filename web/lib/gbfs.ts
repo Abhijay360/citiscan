@@ -18,7 +18,9 @@ export type LiveStation = {
 };
 
 type GbfsInfo = {
-  data: { stations: { station_id: string; short_name: string; name: string; lat: number; lon: number; capacity: number }[] };
+  data: {
+    stations: { station_id: string; short_name: string; name: string; lat: number; lon: number; capacity: number }[];
+  };
 };
 type GbfsStatus = {
   last_updated: number;

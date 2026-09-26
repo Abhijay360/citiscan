@@ -19,7 +19,7 @@ export function walkMinutes(meters: number) {
 
 /** speedKmh is a straight-line speed measured from real trips, so detours are already baked in. */
 export function bikeMinutes(meters: number, speedKmh: number) {
-  return meters / 1000 / speedKmh * 60 + DOCK_OVERHEAD_MIN;
+  return (meters / 1000 / speedKmh) * 60 + DOCK_OVERHEAD_MIN;
 }
 
 export function nearest<T extends LatLon>(items: T[], to: LatLon): T | null {

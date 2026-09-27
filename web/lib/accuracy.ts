@@ -37,8 +37,8 @@ export type SourceAccuracy = {
 
 const PROMISED: Record<Label, string> = { likely: "80%+", maybe: "50-80%", unlikely: "under 50%" };
 const NAMES: Record<string, [string, string]> = {
-  brooklyn: ["Brooklyn, September", "195 stations, Sep 1-25 2026, weekdays and weekends (public archive)"],
-  ours: ["All of NYC, our log", "2,442 stations, logged every minute from Sat Sep 26 2026"],
+  brooklyn: ["Brooklyn, September", "195 stations, Sep 1-26 2026, weekdays and weekends (public archive)"],
+  ours: ["All of NYC, our log", "2,442 stations, logged every minute, Sat Sep 26 to Sun Sep 27 2026"],
 };
 
 export function summarizeBacktest(file: BacktestFile, horizon = "15"): SourceAccuracy[] {

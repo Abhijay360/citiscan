@@ -14,7 +14,7 @@ suggests nearby stations when your destination is likely to be full. Built for H
 > endorsed by Citi, Citi Bike or Lyft.
 
 **The headline:** trust the current count and the station is full when you arrive about 1 in 20 times. Go where
-CitiScan says *likely* and it's about 1 in 53: **62% fewer surprise full stations** (92,040 predictions on real
+CitiScan says *likely* and it's about 1 in 53: **62% fewer surprise full stations** (95,160 predictions on real
 September dock counts, 15 minutes ahead).
 
 Why it matters: on a Saturday at 1pm, 208 of 2,442 stations were completely full and 555 had two or fewer open
@@ -47,17 +47,17 @@ docks. On a weekday morning a Midtown station like E 47 St & Park Ave gains abou
 ### On real dock counts
 
 Two sources of ground truth, both after our June-August training data: **Brooklyn**, a public archive of
-5-minute snapshots of 195 Williamsburg/Greenpoint stations, September 1-25 (weekdays and weekends, including
-rush hours), and **our own log** of all 2,442 stations, every minute, from Saturday September 26 (weekend
-only so far). Numbers are for arriving 15 minutes from now. The app's "How accurate is this?" panel shows them.
+5-minute snapshots of 195 Williamsburg/Greenpoint stations, September 1-26 (weekdays and weekends, including
+rush hours), and **our own log** of all 2,442 stations, every minute, from Saturday afternoon to Sunday morning,
+September 26-27 (weekend only, with gaps while the laptop slept). Numbers are for arriving 15 minutes from now. The app's "How accurate is this?" panel shows them.
 
-| | Brooklyn, Sep 1-25 | All NYC, our log |
+| | Brooklyn, Sep 1-26 | All NYC, our log |
 |---|---|---|
-| Station full on arrival when the current count showed open docks | 4.9% | 1.9% |
-| Station full on arrival when we said **likely** | **1.9%** | **0.5%** |
-| Stations that filled up before you arrived that we warned about (maybe/unlikely) | 66% of 4,052 | 74% of 639 |
+| Station full on arrival when the current count showed open docks | 4.9% | 1.6% |
+| Station full on arrival when we said **likely** | **1.9%** | **0.4%** |
+| Stations that filled up before you arrived that we warned about (maybe/unlikely) | 67% of 4,184 | 75% of 2,227 |
 | We said **unlikely** but a dock was open | 0.4% | 0.0% |
-| Probability score (Brier, lower is better): ours vs trusting the current count | 0.059 vs 0.085 (**31% better**) | 0.029 vs 0.036 (21% better) |
+| Probability score (Brier, lower is better): ours vs trusting the current count | 0.059 vs 0.085 (**31% better**) | 0.026 vs 0.030 (14% better) |
 
 When we said *likely*, a dock was open 98% of the time; *maybe*, 73%; *unlikely*, 40% (Brooklyn). The
 current count can't warn you at all: it only knows about now.
@@ -146,7 +146,7 @@ takes the same options and returns that station's chance of a dock and a bike fo
 4. **Proof (Replay).** Pick "Williamsburg area, Fri Sep 18, 9:25pm". "These are real counts from that night. 24
    stations with open docks were full 15 minutes later; we flagged 18 of them in advance." Tick "Color the map
    by what actually happened" and tap a red station to show "✓ we called it".
-5. **The number.** Open "How accurate is this?": "62% fewer surprise full stations, tested on 92,000
+5. **The number.** Open "How accurate is this?": "62% fewer surprise full stations, tested on 95,000
    predictions against real dock counts the model never saw."
 
 ## Running it
@@ -211,7 +211,7 @@ data/                   raw downloads, logs, caches (not committed)
   Trip station ids match the GBFS `short_name` field (not `station_id`).
 - **Brooklyn snapshot archive** (extra weekday validation data):
   [smturzo/citibike-williamsburg](https://github.com/smturzo/citibike-williamsburg), 5-minute snapshots of 195
-  stations, August 26 to September 25, 2026
+  stations, August 26 to September 26, 2026
 - **Map**: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors; addresses via OpenStreetMap
   Nominatim.
 
